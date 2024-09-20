@@ -10,8 +10,17 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Authentication 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login.form');
+    Route::post('/login', 'login')->name('login');
+    Route::post('/change_pass', 'change_pass')->name('change_pass');
+});
+
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+// Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Route::post('/change_pass', 'change_pass')->name('change_pass');
+
 
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
