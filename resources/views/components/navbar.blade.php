@@ -35,13 +35,13 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://picsum.photos/200/300" class="rounded-circle me-2" alt="User" width="30" height="30">
-              {{-- <span>{{ auth()->user()->name }}</span> --}}
+              <span>{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="#">Ubah Password</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                {{-- <form action="{{ route('logout') }}" method="POST"> --}}
+                <form action="{{ route('logout') }}" method="POST">
                   @csrf
                   <button class="dropdown-item" type="submit">Logout</button>
                 </form>
