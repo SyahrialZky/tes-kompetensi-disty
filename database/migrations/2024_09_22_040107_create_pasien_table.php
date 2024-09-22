@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255); // Nama pasien
-            $table->date('date_of_birth'); // Tanggal lahir
-            $table->enum('gender', ['male', 'female']); // Jenis kelamin
+        Schema::create('pasien', function (Blueprint $table) {
+            $table->id('id_pasien');
+            $table->string('nama_pasien');
+            $table->string('nik');
+            $table->string('telp');
+            $table->string('jenis_pasien');
+            $table->string('jenis_periksa');
+            $table->date('tgl_periksa')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('pasien');
     }
 };
