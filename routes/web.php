@@ -17,10 +17,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/change_pass', 'change_pass')->name('change_pass');
 });
 
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-// Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Route::post('/change_pass', 'change_pass')->name('change_pass');
-
 
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');

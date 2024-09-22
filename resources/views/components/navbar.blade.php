@@ -83,13 +83,6 @@
 
         <!-- Right side content -->
         <ul class="navbar-nav ms-auto d-flex align-items-center">
-          <!-- Dark mode toggle -->
-          <li class="nav-item">
-            <button class="btn btn-light-dark-mode" id="darkModeToggle" type="button">
-              <i class="bi bi-moon"></i>
-            </button>
-          </li>
-
          
 
           <!-- User dropdown -->
@@ -133,10 +126,10 @@
     const input = document.getElementById(inputId);
     if (input.type === "password") {
       input.type = "text";
-      btn.innerHTML = '<i class="mdi mdi-eye-off-outline"></i>';
+      btn.innerHTML = '<i class="fas fa-regular fa-eye-slash"></i>';
     } else {
       input.type = "password";
-      btn.innerHTML = '<i class="mdi mdi-eye-outline"></i>';
+      btn.innerHTML = '<i class="fas fa-regular fa-eye"></i>';
     }
   }
 </script>
