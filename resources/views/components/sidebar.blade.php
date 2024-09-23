@@ -34,6 +34,19 @@
                       <p>Dashboard</p>
                   </a>
               </li>
+              <li class="nav-item">
+                  <a href="/users">
+                      <i class="fas fa-user"></i>
+                      <p>User Management</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('patients.index') }}">
+                      <i class="fas fa-user"></i>
+                      <p>Pasien & Pemeriksaan</p>
+                  </a>
+              </li>
+              
           </ul>
       </div>
   </div>
