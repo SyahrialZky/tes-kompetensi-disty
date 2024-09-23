@@ -62,6 +62,21 @@
         background-color: #f5f5f5;
         padding: 3rem 0;
       }
+
+      .btn-custom {
+        background-color: #1664c4;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-custom:hover {
+        background-color: #0049b0;
+        color: white;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </head>
@@ -197,10 +212,89 @@
       </div>
     </section>
 
+    <!-- Form Daftar Nomor Antrian -->
     <section class="section-alt">
       <div class="container">
-        <h3 class="text-center">Informasi Terbaru</h3>
-        <p class="text-center">Tetap up-to-date dengan layanan terbaru kami</p>
+        <h3 class="text-center">Daftar Nomor Antrian</h3>
+        <p class="text-center">
+          Daftar nomor antrian pasien dengan mengisi form di bawah ini
+        </p>
+        <div class="card mb-3 p-3 shadow">
+          <form method="POST" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+              <label for="nama_pasien" class="form-label">Nama</label>
+              <input
+                type="text"
+                name="nama_pasien"
+                id="nama_pasien"
+                placeholder="Masukkan Nama Pasien"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="telp" class="form-label">No Telp</label>
+              <input
+                type="number"
+                name="telp"
+                id="telp"
+                placeholder="Masukkan No Telp"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Masukkan Email"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="tgl_periksa" class="form-label"
+                >Tanggal Periksa</label
+              >
+              <input
+                type="date"
+                name="tgl_periksa"
+                id="tgl_periksa"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="kategori_pasien" class="form-label"
+                >Kategori Pasien</label
+              >
+              <select
+                name="kategori_pasien"
+                id="kategori_pasien"
+                class="form-select"
+                required
+              >
+                <option value="umum">Umum</option>
+                <option value="bpjs">BPJS</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="keluhan" class="form-label">Keluhan</label>
+              <textarea
+                name="keluhan"
+                id="keluhan"
+                class="form-control"
+                placeholder="Masukkan Keluhan"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom btn-block">
+              Kirim
+            </button>
+          </form>
+        </div>
       </div>
     </section>
 
