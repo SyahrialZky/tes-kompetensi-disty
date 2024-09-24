@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasRole($roles)
+    {
+        // Assume roles is stored in a relation or in a 'role' field
+        if (is_array($roles)) {
+            return in_array($this->role, $roles);
+        }
+
+        return $this->role == $roles;
+    }
 }

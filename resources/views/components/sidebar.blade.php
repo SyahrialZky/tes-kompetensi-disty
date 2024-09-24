@@ -4,6 +4,7 @@
         <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
                 <img src=" {{ asset('assets/img/logo_light.png') }} " alt="navbar brand" class="navbar-brand" height="20" />
+                {{-- <span class="text-white">Klinik Sehat</span> --}}
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -29,18 +30,24 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                @if (Auth::user()->hasRole('admin'))
                 <li class="nav-item {{ Request::is('users') ? 'active' : '' }}">
                     <a href="/users">
                         <i class="fas fa-user"></i>
                         <p>User Management</p>
                     </a>
                 </li>
+                @endif
+                
+                @if (Auth::user()->hasRole(['admin', 'petugas']))
                 <li class="nav-item {{ Request::is('patients*') ? 'active' : '' }}">
                     <a href="{{ route('patients.index') }}">
                         <i class="fas fa-user"></i>
                         <p>Pasien & Pemeriksaan</p>
                     </a>
                 </li>
+                @endif
+
             </ul>
         </div>
     </div>
