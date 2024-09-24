@@ -14,13 +14,13 @@ class PatientController extends Controller
         return view('patients.index', compact('patients'));
     }
 
-    // Create: Show form to create a new patient
+    // Create: Form untuk tambah pasien
     public function create()
     {
         return view('patients.create');
     }
 
-    // Store: Save new patient
+    // Store: Save pasien baru
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -49,7 +49,7 @@ class PatientController extends Controller
         return redirect()->route('patients.index')->with('success', 'Pasien berhasil ditambahkan');
     }
 
-    // Show: View a specific patient
+    // Show: View a pasien spesifik
     public function show(Patient $patient)
     {
         $totalBill = 0;
@@ -83,13 +83,13 @@ class PatientController extends Controller
     }
 
 
-    // Edit: Show form to edit an existing patient
+    // Edit: Show form untuk edit pasien
     public function edit(Patient $patient)
     {
         return view('patients.edit', compact('patient'));
     }
 
-    // Update: Save changes to an existing patient
+    // Update: Save perubahan edit (update)
     public function update(Request $request, Patient $patient)
     {
         $validateData = $request->validate([
@@ -118,7 +118,7 @@ class PatientController extends Controller
         return redirect()->route('patients.index')->with('success', 'Pasien berhasil diperbarui');
     }
 
-    // Destroy: Delete a patient
+    // Destroy: Delete pasien
     public function destroy(Patient $patient)
     {
         $patient->delete();

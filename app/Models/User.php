@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function hasRole($roles)
     {
-        // Assume roles is stored in a relation or in a 'role' field
+        // Asumsi Role ada pada field user
         if (is_array($roles)) {
             return in_array($this->role, $roles);
         }

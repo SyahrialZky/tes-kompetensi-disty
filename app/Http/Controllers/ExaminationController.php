@@ -9,21 +9,21 @@ use Illuminate\Http\Request;
 
 class ExaminationController extends Controller
 {
-    // Index: List all examinations for a patient
+    // Index: List semua pemeriksaan milik pasien
     public function index(Patient $patient)
     {
         $examinations = $patient->examinations;
         return view('examinations.index', compact('examinations', 'patient'));
     }
 
-    // Create: Show form to create a new examination
+    // Create: Show form untuk tambah pemeriksaan (examination)
     public function create(Patient $patient)
     {
         $categories = Category::all();
         return view('examinations.create', compact('patient', 'categories'));
     }
 
-    // Store: Save new examination
+    // Store: Save pemeriksaan baru
     public function store(Request $request, Patient $patient)
     {
         $request->validate([
@@ -42,20 +42,20 @@ class ExaminationController extends Controller
         return redirect()->route('examinations.index', $patient)->with('success', 'Pemeriksaan berhasil ditambahkan');
     }
 
-    // Show: View a specific examination
+    // Show: Lihat spesifik pemeriksaan (examination)
     public function show(Examination $examination)
     {
         return view('examinations.show', compact('examination'));
     }
 
-    // Edit: Show form to edit an existing examination
+    // Edit: Show form untuk edit pemeriksaan
     public function edit(Examination $examination)
     {
         $categories = Category::all();
         return view('examinations.edit', compact('examination', 'categories'));
     }
 
-    // Update: Save changes to an existing examination
+    // Update: Save perubahan update pemeriksaan
     public function update(Request $request, Examination $examination)
     {
         $request->validate([
@@ -74,14 +74,14 @@ class ExaminationController extends Controller
         return redirect()->route('examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil diperbarui');
     }
 
-    // Destroy: Delete an examination
+    // Destroy: Delete pemeriksaan
     public function destroy(Examination $examination)
     {
         $examination->delete();
 
         return redirect()->route('examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil dihapus');
     }
-
+    // Function untuk update tarif pemeriksaan
     private function updatePatientBill(Patient $patient)
     {
         // Ambil semua pemeriksaan pasien
@@ -111,6 +111,7 @@ class ExaminationController extends Controller
         // Simpan tagihan ke pasien
         $patient->update(['tagihan' => $totalBill]);
     }
+    // Function ubah status ditangani / belum 
     public function handle($id)
     {
         // Cari data pemeriksaan berdasarkan ID

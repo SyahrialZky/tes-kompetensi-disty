@@ -3,7 +3,7 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
-                <img src=" {{ asset('assets/img/logo_light.png') }} " alt="navbar brand" class="navbar-brand" height="20" />
+                <img src=" {{ asset('assets/img/kliniksehat.svg') }} " alt="navbar brand" class="navbar-brand" height="30" />
                 {{-- <span class="text-white">Klinik Sehat</span> --}}
             </a>
             <div class="nav-toggle">
