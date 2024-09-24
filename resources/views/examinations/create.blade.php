@@ -27,6 +27,10 @@
                 <label for="results">Hasil Pemeriksaan</label>
                 <textarea name="results" class="form-control" required></textarea>
             </div>
+            <div class="form-group">
+                <label for="tarif">Tarif</label>
+                <input type="number" id="tarif" name="tarif" class="form-control" required>
+            </div>
 
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>

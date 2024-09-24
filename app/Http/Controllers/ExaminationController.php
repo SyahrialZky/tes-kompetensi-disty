@@ -30,11 +30,16 @@ class ExaminationController extends Controller
             'category_id' => 'required|exists:categories,id',
             'date' => 'required|date',
             'results' => 'required|string',
+            'tarif' => 'required|numeric',
         ]);
 
-        $patient->examinations()->create($request->all());
+        // Buat pemeriksaan baru
+        $examination = $patient->examinations()->create($request->only(['category_id', 'date', 'results', 'tarif']));
 
-        return redirect()->route('patients.examinations.index', $patient)->with('success', 'Pemeriksaan berhasil ditambahkan');
+        // Update tagihan pasien setelah menambahkan pemeriksaan baru
+        $this->updatePatientBill($patient);
+
+        return redirect()->route('examinations.index', $patient)->with('success', 'Pemeriksaan berhasil ditambahkan');
     }
 
     // Show: View a specific examination
@@ -57,11 +62,16 @@ class ExaminationController extends Controller
             'category_id' => 'required|exists:categories,id',
             'date' => 'required|date',
             'results' => 'required|string',
+            'tarif' => 'required|numeric',
         ]);
 
-        $examination->update($request->all());
+        // Update pemeriksaan
+        $examination->update($request->only(['category_id', 'date', 'results', 'tarif']));
 
-        return redirect()->route('patients.examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil diperbarui');
+        // Update tagihan pasien setelah perubahan
+        $this->updatePatientBill($examination->patient);
+
+        return redirect()->route('examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil diperbarui');
     }
 
     // Destroy: Delete an examination
@@ -69,6 +79,49 @@ class ExaminationController extends Controller
     {
         $examination->delete();
 
-        return redirect()->route('patients.examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil dihapus');
+        return redirect()->route('examinations.index', $examination->patient_id)->with('success', 'Pemeriksaan berhasil dihapus');
+    }
+
+    private function updatePatientBill(Patient $patient)
+    {
+        // Ambil semua pemeriksaan pasien
+        $examinations = $patient->examinations;
+
+        $totalBill = 0;
+
+        foreach ($examinations as $examination) {
+            $tarif = $examination->tarif;
+
+            // Dapatkan jenis kategori pemeriksaan (misal BPJS atau Umum)
+            $jenisPemeriksaan = $examination->category->name; // Sesuaikan dengan kategori 'BPJS' atau 'Umum'
+
+            // Aturan diskon untuk BPJS
+            if ($jenisPemeriksaan === 'BPJS' && $tarif >= 500000) {
+                $tarif = $tarif * 0.4; // Diskon 60%
+            }
+            // Aturan diskon untuk Umum
+            elseif ($jenisPemeriksaan === 'Umum' && $tarif < 500000) {
+                $tarif = $tarif * 0.9; // Diskon 10%
+            }
+
+            // Tambahkan tarif (setelah diskon) ke total tagihan
+            $totalBill += $tarif;
+        }
+
+        // Simpan tagihan ke pasien
+        $patient->update(['tagihan' => $totalBill]);
+    }
+    public function handle($id)
+    {
+        // Cari data pemeriksaan berdasarkan ID
+        $examination = Examination::findOrFail($id);
+
+        // Ubah status menjadi true (handled)
+        $examination->update([
+            'status' => true,
+        ]);
+
+        // Redirect ke halaman sebelumnya atau ke halaman daftar pemeriksaan dengan pesan sukses
+        return redirect()->back()->with('success', 'Pemeriksaan berhasil ditangani.');
     }
 }

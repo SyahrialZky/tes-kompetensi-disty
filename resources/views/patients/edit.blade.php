@@ -35,6 +35,27 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="no_telp" class="form-label">No Telepon</label>
+            <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp" value="{{ old('no_telp', $patient->no_telp) }}" placeholder="no telp pasien" required>
+            @error('no_telp')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email' , $patient->email)}}" placeholder="email pasien" required >
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="keluhan" class="form-label">Keluhan</label>
+            <input type="text" class="form-control @error('keluhan') is-invalid @enderror" id="keluhan" name="keluhan" value="{{ old('keluhan', $patient->keluhan) }}" placeholder="Keluhan pasien" required>
+            @error('keluhan')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         <a href="{{ route('patients.index') }}" class="btn btn-secondary">Batal</a>
