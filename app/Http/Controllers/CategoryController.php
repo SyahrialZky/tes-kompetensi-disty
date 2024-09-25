@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // Index: List all categories
+    // Index: List semua kategori
     public function index()
     {
         $categories = Category::all();

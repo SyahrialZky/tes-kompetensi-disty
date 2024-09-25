@@ -22,6 +22,8 @@
                 <th>Nama</th>
                 <th>Tanggal Lahir</th>
                 <th>Jenis Kelamin</th>
+                <th>No Telepon</th>
+                <th>Email</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -31,10 +33,21 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $patient->name }}</td>
                     <td>{{ $patient->date_of_birth }}</td>
-                    <td>{{ ucfirst($patient->gender) }}</td>
+
+                    <td> 
+                        @if (ucfirst($patient->gender == 'male'))
+                                Laki - Laki
+                        @else
+                                Perempuan
+                        @endif  
+                </td>
+
+                    <td>{{ $patient->no_telp }}</td>
+                    <td>{{ $patient->email }}</td>
+
                     <td>
                         <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-info btn-sm"><i class="fas fa-search"></i></a>
-                        <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success btn-sm"><i class="fas fa-stethoscope"></i></a>
+                        <a href="{{ route('examinations.index', $patient->id) }}" class="btn btn-success btn-sm"><i class="fas fa-stethoscope"></i></a>
                         <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
                         <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="d-inline">
                             @csrf

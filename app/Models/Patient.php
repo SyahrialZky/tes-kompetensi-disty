@@ -13,5 +13,14 @@ class Patient extends Model
         'name',
         'date_of_birth',
         'gender',
+        'no_telp',
+        'email',
+        'keluhan',
+        'diagnosa',
+
     ];
+    public function examinations()
+    {
+        return $this->hasMany(Examination::class);
+    }
 }

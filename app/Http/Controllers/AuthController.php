@@ -99,7 +99,7 @@ class AuthController extends Controller
                 200
             );
         } catch (\Exception $e) {
-            // Handle any other errors
+            // Handle error
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }

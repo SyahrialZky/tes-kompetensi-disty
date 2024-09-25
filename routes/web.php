@@ -50,7 +50,8 @@ Route::middleware([RoleMiddleware::class . ':petugas,admin'])->group(function ()
     Route::put('/patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
     Route::delete('/patients/{patient}', [PatientController::class, 'destroy'])->name('patients.destroy');
     Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
-
+    Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
+    Route::put('/patients/{id}/update-diagnosa', [PatientController::class, 'updateDiagnosa'])->name('patients.updateDiagnosa');
 
     // Route examinasi / pemeriksaan
     Route::get('/patients/{patient}/examinations', [ExaminationController::class, 'index'])->name('examinations.index');
@@ -59,7 +60,7 @@ Route::middleware([RoleMiddleware::class . ':petugas,admin'])->group(function ()
     Route::get('/examinations/{examination}/edit', [ExaminationController::class, 'edit'])->name('examinations.edit');
     Route::put('/examinations/{examination}', [ExaminationController::class, 'update'])->name('examinations.update');
     Route::delete('/examinations/{examination}', [ExaminationController::class, 'destroy'])->name('examinations.destroy');
-    Route::get('/examinations/{examination}', [ExaminationController::class, 'show'])->name('examinations.show');
+    Route::get('examinations/{id}/handle', [ExaminationController::class, 'handle'])->name('examinations.handle');
 
 
     // Route kategori

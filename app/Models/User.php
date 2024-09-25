@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasRole($roles)
+    {
+        // Asumsi Role ada pada field user
+        if (is_array($roles)) {
+            return in_array($this->role, $roles);
+        }
+
+        return $this->role == $roles;
+    }
 }
