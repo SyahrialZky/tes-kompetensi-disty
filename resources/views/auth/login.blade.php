@@ -2,71 +2,155 @@
 
 @section('title', 'Login')
 
-<div class="login-page">
-    <div class="container">
-        <div class="row justify-content-center align-items-center vh-100">
-            <div class="col-lg-6">
-                <h3 class="mb-3">Login</h3>
-                <div class="bg-white shadow rounded">
-                    <div class="row">
-                        <div class="col-md-7 pe-0">
-                            <div class="form-left h-100 py-5 px-5">
-                                <form action="{{ route('login') }}" method="POST" class="row g-4">
-                                    @csrf
-                                    <div class="col-12">
-                                        <label>Email<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                            <input type="email" name="email" class="form-control" placeholder="Enter Email">
-                                        </div>
-                                        @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+<style>
+    body {
+        background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+        height: 100vh;
+    }
 
-                                    <div class="col-12">
-                                        <label>Password<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                                            <input type="password" name="password" class="form-control" placeholder="Enter Password">
-                                        </div>
-                                        @error('password')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
 
-                                    
-                                    <div class="col-sm-6">
-                                        <a href="#" class="float-end text-primary text-decoration-none">Forgot Password?</a>
-                                    </div>
+    .login-form {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+    }
 
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary px-4 float-end mt-4">Login</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-5 ps-0 d-none d-md-block">
-                            <div class="form-right h-100 bg-primary text-white text-center pt-5">
-                                <i class="bi bi-bootstrap"></i>
-                                <h2 class="fs-1">Welcome Back!!!</h2>
-                            </div>
-                        </div>
+    .login-form-right {
+        flex: 1;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-form-left {
+        flex: 1;
+        background-image: url("{{ asset('assets/img/bg.png') }}");
+        background-size: cover;
+        background-position: center;
+        display: none;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-social {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-social i {
+        margin-right: 10px;
+    }
+
+    .divider {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .divider::before, .divider::after {
+        content: '';
+        position: absolute;
+        width: 45%;
+        height: 1px;
+        background: #ddd;
+        top: 50%;
+    }
+
+    .divider::before {
+        left: 0;
+    }
+
+    .divider::after {
+        right: 0;
+    }
+
+    .divider span {
+        background: #fff;
+        padding: 0 10px;
+        color: #aaa;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-form">
+        <div class="login-form-left d-none d-md-block"></div>
+
+        <div class="login-form-right">
+            <h3 class="mb-3 text-center">Login to Klinik Sehat</h3>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label>Email<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
                     </div>
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <p class="text-end text-secondary mt-3">Melayani dengan sepenuh hati</p>
-            </div>
+
+                <div class="mb-3">
+                    <label>Password<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                            <i class="bi bi-eye-slash" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3 d-flex justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="text-primary text-decoration-none">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                <div class="divider"><span>OR</span></div>
+
+                <a href="#" class="btn btn-social btn-primary">
+                    <i class="fab fa-facebook-f"></i> Continue with Facebook
+                </a>
+                <a href="#" class="btn btn-social btn-info">
+                    <i class="fab fa-twitter"></i> Continue with Twitter
+                </a>
+            </form>
         </div>
     </div>
 </div>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
 
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        eyeIcon.classList.toggle('bi-eye-slash');
+        eyeIcon.classList.toggle('bi-eye');
+    });
+</script>
