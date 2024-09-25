@@ -19,6 +19,7 @@ class ExaminationSeeder extends Seeder
                 'category_id' => 1, // ID kategori BPJS
                 'date' => '2023-09-20',
                 'results' => 'Hasil pemeriksaan untuk pasien 1',
+                'tarif' => 820000,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,6 +28,7 @@ class ExaminationSeeder extends Seeder
                 'category_id' => 2, // ID kategori Umum
                 'date' => '2023-09-21',
                 'results' => 'Hasil pemeriksaan untuk pasien 2',
+                'tarif' => 730000,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -35,6 +37,7 @@ class ExaminationSeeder extends Seeder
                 'category_id' => 1,
                 'date' => '2023-09-22',
                 'results' => 'Hasil pemeriksaan untuk pasien no 3',
+                'tarif' => 640000,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
