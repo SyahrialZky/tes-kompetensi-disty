@@ -25,7 +25,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|',
+            'password' => 'required|string|min:6',
             'role' => 'required|in:petugas,admin'  // Validate role enum 'petugas' or 'admin'
         ]);
 
@@ -52,7 +52,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|',
+            'password' => 'nullable|string|min:6',
             'role' => 'required|in:petugas,admin'  // Ensure role is valid
         ]);
 

@@ -59,7 +59,7 @@
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Tambah User</button>
-            <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
+            <a href="{{ route('users.index') }}" class="btn btn-danger">Batal</a>
         </form>
     </div>
 @endsection

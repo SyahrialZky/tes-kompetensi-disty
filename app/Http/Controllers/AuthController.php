@@ -26,7 +26,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([
@@ -90,14 +90,16 @@ class AuthController extends Controller
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return response()->json(
-                [
-                    'status' => 'success',
-                    'message' => 'Password berhasil diubah, silahkan login kembali!',
-                    'redirect' => '/login'
-                ],
-                200
-            );
+            return redirect()->route('login.form');
+
+            // return response()->json(
+            //     [
+            //         'status' => 'success',
+            //         'message' => 'Password berhasil diubah, silahkan login kembali!',
+            //         'redirect' => '/login'
+            //     ],
+            //     200
+            // );
         } catch (\Exception $e) {
             // Handle error
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
