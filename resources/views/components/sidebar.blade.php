@@ -23,8 +23,8 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <!-- Menu Dashboard -->
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a href="/">
+                <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a href="/dashboard">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
